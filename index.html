@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SCF Floor Kiosk (prototype, EXAMPLE DATA)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="stage">
+
+  <!-- Persistent header -->
+  <header id="topbar">
+    <div class="brand"><span id="plantName">SIOUX CITY FOUNDRY</span><span class="divider"></span><span id="screenLabel">POUR SCHEDULE</span></div>
+    <div class="example-badge">EXAMPLE DATA</div>
+    <div class="clock"><div id="clockTime">--:--</div><div id="clockDate"></div></div>
+  </header>
+
+  <!-- SCREEN 1: Pour schedule -->
+  <section id="screen-schedule" class="screen active" aria-label="Pour schedule">
+    <div class="sched-title">
+      <h1><span id="schedLine">PLANT 2 MOLDING LINE</span></h1>
+      <div class="scan-hint"><span class="scan-icon">&#9638;</span> SCAN JOB TICKET FOR INSTRUCTIONS</div>
+    </div>
+    <table id="schedTable">
+      <colgroup><col class="c-pour"><col class="c-job"><col class="c-cust"><col class="c-pat"><col class="c-alloy"><col class="c-qty"><col class="c-core"></colgroup>
+      <thead><tr><th>POUR / STATUS</th><th>JOB #</th><th>CUSTOMER</th><th>PATTERN</th><th>ALLOY</th><th class="num">QTY</th><th>CORE</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <!-- SCREEN 2: Job detail -->
+  <section id="screen-job" class="screen" aria-label="Job instructions">
+    <div class="job-head">
+      <div class="job-no">JOB <span id="jJob"></span></div>
+      <div class="job-cust" id="jCustomer"></div>
+      <div class="job-pattern">PATTERN <span id="jPattern"></span></div>
+    </div>
+    <div class="job-grid">
+      <div class="facts">
+        <div class="fact alloy-fact"><div class="lbl">ALLOY</div><div class="val" id="jAlloy"></div><div class="sub" id="jGrade"></div></div>
+        <div class="fact-row">
+          <div class="fact"><div class="lbl">QTY</div><div class="val accent" id="jQty"></div></div>
+          <div class="fact"><div class="lbl">POUR TEMP</div><div class="val accent" id="jTemp"></div></div>
+        </div>
+        <div class="fact"><div class="lbl">COPE / DRAG</div><div class="val mid" id="jWeights"></div></div>
+        <div class="fact"><div class="lbl">FLASK</div><div class="val small" id="jFlask"></div></div>
+        <div class="fact"><div class="lbl">PATTERN LOCATION</div><div class="val small" id="jLoc"></div></div>
+      </div>
+      <div class="steps">
+        <div class="panel"><h2>MOLD STEPS</h2><ol id="jMold" class="steplist"></ol></div>
+        <div class="panel"><h2>CORE SET</h2><table id="jCores" class="coretable"><tbody></tbody></table></div>
+      </div>
+      <div class="side">
+        <div class="panel caution"><h2>&#9888; CAUTION</h2><ul id="jCautions"></ul></div>
+        <div class="photos" id="jPhotos"></div>
+      </div>
+    </div>
+    <div class="job-foot">
+      <div class="idle-wrap"><div class="idle-text">BACK TO SCHEDULE IN <span id="idleSecs"></span> S</div><div class="idle-bar"><div id="idleFill"></div></div></div>
+      <div class="foot-hint">SCAN ANOTHER TICKET ANYTIME</div>
+    </div>
+  </section>
+
+  <!-- SCREEN 3: Unknown code -->
+  <section id="screen-error" class="screen" aria-label="Unknown code">
+    <div class="err-box">
+      <div class="err-icon">?</div>
+      <div class="err-title">JOB NOT FOUND</div>
+      <div class="err-code">SCANNED: <span id="errCode"></span></div>
+      <div class="err-help">CHECK THE TICKET OR ASK YOUR LEAD.<br>SCAN AGAIN TO TRY ANOTHER JOB.</div>
+      <div class="err-return">BACK TO SCHEDULE IN <span id="errSecs"></span> S</div>
+    </div>
+  </section>
+
+  <!-- Scan flash -->
+  <div id="scanToast" class="toast"></div>
+
+  <!-- Demo controls (hide on a real kiosk with ?demo=0) -->
+  <button id="demoToggle" type="button" tabindex="-1">DEMO</button>
+  <div id="demoPanel" class="hidden">
+    <div class="demo-title">SIMULATE A SCAN <small>(types the code + Enter, same path as the USB scanner)</small></div>
+    <div id="demoButtons"></div>
+    <div class="demo-row">
+      <button type="button" data-scan="BAD-0000" tabindex="-1">Unknown code</button>
+      <button type="button" id="demoHome" tabindex="-1">Back to schedule</button>
+      <label>Idle seconds <input id="demoIdle" type="number" min="3" max="600" tabindex="-1"></label>
+    </div>
+  </div>
+</div>
+
+<!-- Fallback copy of jobs.json for when index.html is opened from disk (file://), where fetch() is blocked. -->
+<script src="jobs-fallback.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
