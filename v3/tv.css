@@ -1,4 +1,4 @@
-body{overflow:hidden;background:#000}
+body{overflow:hidden;background:#D5D9DD}
 .stage{font-size:24px}
 .clock{font-weight:800;font-size:32px;min-width:140px;text-align:right}
 #tv{height:996px;display:flex;flex-direction:column;padding:16px;gap:16px}
@@ -35,16 +35,12 @@ body{overflow:hidden;background:#000}
 .spot .count{display:flex;align-items:center;gap:16px;font-size:28px;font-weight:800;margin-top:16px}
 .spot .bar{flex:1;height:16px;background:var(--soft);border-radius:8px;overflow:hidden}.spot .bar i{display:block;height:100%;background:var(--blue)}
 .empty{flex:1;display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:800;color:var(--muted)}
-/* Dark TV theme. Panels #1C2026, text #F2F2F0, amber kept for tags. No white fills. */
-.stage{--bg:#121417;--card:#1C2026;--text:#F2F2F0;--muted:#C9CDD2;--line:#3A414A;background:#121417;color:#F2F2F0}
-.stage .topbar{background:#1C2026;color:#F2F2F0;border-bottom:2px solid #3A414A}
-.stage .topbar .btn{color:#F2F2F0;border-color:#F2F2F0}
-.linecell{background:#1C2026;color:#F2F2F0;border:2px solid #3A414A}
-.cell{background:#1C2026;border-color:#3A414A;color:#F2F2F0}
-.ph{background:#2A3038;color:#F2F2F0}
-.flag{background:#3A1614;border-left-color:#FF8A80;color:#F2F2F0}.flag svg{color:#FF8A80}
-.spot li{background:#1C2026;border-color:#3A414A}
-.spot li::before{background:#F2F2F0;color:#121417}
-.spot .bar{background:#3A414A}.spot .bar i{background:#7FB3F0}
-.idle span{border-color:#5A626C;color:#C9CDD2}
 .r3 .cell .ph{min-height:76px;padding:4px 8px}.r3 .cell .ph .pre{display:none}.r3 .cell .flag{font-size:22px}
+/* Light industrial TV (v2 palette) */
+.linecell{background:var(--card);color:var(--text);border:2px solid var(--line)}
+.cell{background:var(--card);border-color:var(--line);color:var(--text)}
+.jobno{color:var(--text)}
+.lnum{color:var(--text)}
+.cell.updated{border-color:var(--amber);box-shadow:inset 0 0 0 6px var(--amber);background:#FFF6E0}
+.upd{color:var(--text)}
+.idle span{font-size:30px;font-weight:800;color:var(--text);background:var(--card);border:3px solid var(--line);border-style:solid;padding:10px 20px}
