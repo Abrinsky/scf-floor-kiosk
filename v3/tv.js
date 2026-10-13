@@ -22,8 +22,8 @@
         var s = tvStep(stepsFor(j, st.id));
         if (!s) return '<div class="cell"></div>';
         var cau = stepsFor(j, st.id).filter(function (x) { return x.caution; })[0];
-        return '<div class="cell">' + S.photo(s) + '<div class="txt"><div class="chk">' + e(s.short) + '</div>' +
-          (cau ? '<div class="flag">' + S.icon.warn + '<span>' + e(cau.caution) + '</span></div>' : '') + '</div></div>';
+        return '<div class="cell">' + S.photo(s) + '<div class="txt"><div class="chk">' + e(s.short) + '</div></div>' +
+          (cau ? '<div class="flag">' + S.icon.warn + '<span>' + e(cau.caution) + '</span></div>' : '') + '</div>';
       }).join('');
       return '<div class="row"><div class="linecell"><div class="lname">' + e(l.name) + '</div><div class="tag">Job ' + e(j.job) + '</div>' +
         '<div class="meta">' + e(j.pattern) + '<br>' + e(j.alloy) + '<br>Qty ' + e(j.qty) + '</div></div>' + cells + '</div>';
