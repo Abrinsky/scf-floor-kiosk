@@ -61,8 +61,8 @@ main{padding:16px;max-width:1920px;margin:0 auto}
 /* Not found */
 .nf{max-width:900px;margin:40px auto;background:var(--card);border:2px solid var(--line);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:20px}
 .nf .msg{font-size:1.3em;font-weight:800}
-/* Phone: one step at a time */
-.steps.paged .step{display:none}.steps.paged .step.cur{display:flex}
+/* Active step: amber outline only, all steps stay visible */
+.step.cur{border-color:var(--amber);box-shadow:0 0 0 4px var(--amber)}
 /* Tablet / large */
 @media (min-width:760px){.grid{grid-template-columns:1fr 1fr}.facts{grid-template-columns:repeat(4,1fr)}}
 @media (min-width:1200px){
@@ -71,8 +71,6 @@ main{padding:16px;max-width:1920px;margin:0 auto}
   .grid{grid-template-columns:repeat(3,1fr)}
   .card .thumb{width:140px}
   .steps{grid-template-columns:repeat(2,1fr)}
-  .steps.paged .step{display:flex}
-  .step .stepnav{display:none}
   .fact{padding:16px 20px;border-color:#8A9198}
   .fact .val{font-size:clamp(40px,3.3vw,64px);white-space:nowrap}
   .fact .val.long{font-size:clamp(36px,2.6vw,52px)}

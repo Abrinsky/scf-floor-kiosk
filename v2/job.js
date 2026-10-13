@@ -30,18 +30,20 @@
         fact('', I.weight, 'Cope / drag', e(j.copeLb) + ' / ' + e(j.dragLb) + ' lb') +
         fact('', I.pin, 'Pattern location', e(j.location)) +
       '</div>' +
-      '<h2 class="vh" hidden>Steps</h2><div class="steps paged" id="steps">' + cards + '</div>' +
+      '<h2 class="vh" hidden>Steps</h2><div class="steps" id="steps">' + cards + '</div>' +
       '<div id="doneMsg"></div>';
     document.getElementById('backBtn').addEventListener('click', K.home);
     var box = document.getElementById('steps');
     box.addEventListener('click', function (ev) {
       var g = ev.target.closest('[data-go]');
       if (g) {
-        var to = +g.getAttribute('data-go');
-        box.querySelectorAll('.step').forEach(function (s) { s.classList.toggle('cur', +s.getAttribute('data-i') === to); });
-        box.scrollIntoView({ block: 'start' }); window.scrollBy(0, -100);
+        ev.preventDefault(); g.blur();
+        var to = +g.getAttribute('data-go'), target = null;
+        box.querySelectorAll('.step').forEach(function (s) { var on = +s.getAttribute('data-i') === to; s.classList.toggle('cur', on); if (on) target = s; });
+        if (target) target.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
       }
       if (ev.target.closest('[data-done]')) {
+        ev.preventDefault();
         document.getElementById('doneMsg').innerHTML = '<p class="done-msg">All steps done for job ' + e(j.job) + '. Scan the next ticket or go back to jobs.</p>';
         document.getElementById('doneMsg').scrollIntoView({ block: 'center' });
       }
