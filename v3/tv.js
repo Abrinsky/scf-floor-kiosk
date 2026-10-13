@@ -11,30 +11,46 @@
   function tvStep(list) { for (var i = 0; i < list.length; i++) if (list[i].tv) return list[i]; return list[0]; }
   function activeLines() { return S.lines.filter(function (l) { return S.state.assign[l.id]; }); }
 
+  function cellSig(l, j, stId) {
+    var list = stepsFor(j, stId), t = tvStep(list) || {};
+    return [j.job, t.short, t.photo ? t.photo.length : 0, list.map(function (x) { return x.caution; }).join('|')].join('~');
+  }
+  var lastSig = null;
   function renderGrid() {
     var act = activeLines(), shown = act;
-    if (act.length >= 4) shown = act.filter(function (l) { return S.state.pinned.indexOf(l.id) >= 0; }).slice(0, 3);
+    if (act.length >= 4) shown = act.filter(function (l) { return S.state.pinned.indexOf(l.id) >= 0; });
+    if (q.get('only')) shown = act.filter(function (l) { return q.get('only').split(',').indexOf(l.id) >= 0; }); // demo view, not saved
+    shown = shown.slice(0, 3);
     var hidden = S.lines.filter(function (l) { return shown.indexOf(l) < 0; });
-    if (!shown.length) { tv.innerHTML = '<div class="empty">No lines running</div>'; return; }
+    if (!shown.length) { tv.innerHTML = '<div class="empty">No lines running</div>'; lastSig = {}; return; }
+    var sig = {}, changed = [];
     var rows = shown.map(function (l) {
       var j = S.job(S.state.assign[l.id]);
-      var cells = S.stations.map(function (st) {
-        var s = tvStep(stepsFor(j, st.id));
-        if (!s) return '<div class="cell"></div>';
-        var cau = stepsFor(j, st.id).filter(function (x) { return x.caution; })[0];
-        return '<div class="cell">' + S.photo(s) + '<div class="txt"><div class="chk">' + e(s.short) + '</div></div>' +
-          (cau ? '<div class="flag">' + S.icon.warn + '<span>' + e(cau.caution) + '</span></div>' : '') + '</div>';
+      var cells = l.stations.slice(0, 4).map(function (stId) {
+        var st = S.station(stId), list = stepsFor(j, stId), s = tvStep(list), key = l.id + '-' + stId;
+        sig[key] = cellSig(l, j, stId);
+        if (lastSig && lastSig[key] !== undefined && lastSig[key] !== sig[key]) changed.push(key);
+        var cau = list.filter(function (x) { return x.caution; })[0];
+        return '<div class="cell" data-key="' + key + '"><div class="stname">' + e(st.name) + '</div>' +
+          (s ? S.photo(s) + '<div class="chk">' + e(s.short) + '</div>' : '<div class="chk">No step</div>') +
+          (cau ? '<div class="flag">' + S.icon.warn + '<span>' + e(cau.caution) + '</span></div>' : '') + '<span class="upd">Updated</span></div>';
       }).join('');
-      return '<div class="row"><div class="linecell"><div class="lname">' + e(l.name) + '</div><div class="tag">Job ' + e(j.job) + '</div>' +
-        '<div class="meta">' + e(j.pattern) + '<br>' + e(j.alloy) + '<br>Qty ' + e(j.qty) + '</div></div>' + cells + '</div>';
+      return '<div class="row"><div class="linecell"><div class="lhead"><span class="lnum">' + l.num + '</span><span class="lname">' + e(l.name) + '</span></div>' +
+        '<div class="jobno">' + e(j.job) + '</div><div class="meta">' + e(j.pattern) + ', ' + e(j.alloy) + '</div></div>' + cells + '</div>';
     }).join('');
-    tv.innerHTML = '<div class="colhead"><div>Line</div>' + S.stations.map(function (s) { return '<div>' + e(s.name) + '</div>'; }).join('') + '</div>' +
-      '<div class="grid r' + shown.length + '" style="grid-template-rows:repeat(' + shown.length + ',1fr)">' + rows + '</div>' +
+    tv.innerHTML = '<div class="grid r' + shown.length + '" style="grid-template-rows:repeat(' + shown.length + ',minmax(0,1fr))">' + rows + '</div>' +
       (hidden.length ? '<div class="idle">' + hidden.map(function (l) { return '<span>' + e(l.name) + (S.state.assign[l.id] ? ': running, not pinned' : ': idle') + '</span>'; }).join('') + '</div>' : '');
+    lastSig = sig;
+    // One-time amber highlight for cells the iPad just changed. No looping animation.
+    changed.forEach(function (k) {
+      var c = tv.querySelector('[data-key="' + k + '"]'); if (!c) return;
+      c.classList.add('updated');
+      setTimeout(function () { c.classList.remove('updated'); }, 3000);
+    });
   }
 
   function renderSpot(sp) {
-    var st = S.stations.filter(function (x) { return x.id === sp.station; })[0];
+    var st = S.station(sp.station);
     var line = S.lines.filter(function (x) { return x.id === sp.line; })[0] || S.lines[0];
     var j = S.job(S.state.assign[line.id]) || S.job(S.state.assign[activeLines()[0] && activeLines()[0].id]);
     if (!st || !j) { S.state.spotlight = null; return renderGrid(); }

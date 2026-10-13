@@ -2,15 +2,18 @@
    State lives in localStorage and syncs between tabs with the storage event. */
 var SCF = (function () {
   'use strict';
-  var KEY = 'scf-v3-state';
+  var KEY = 'scf-v3-state-2';
   var S = {};
   S.lines = [
-    { id: 'L1', name: 'Roller line 1' }, { id: 'L2', name: 'Roller line 2' },
-    { id: 'L3', name: 'Roller line 3' }, { id: 'L4', name: 'Roller line 4' }
+    { id: 'L1', num: 1, name: 'Line 1', stations: ['CORE', 'CHAP', 'PAINT', 'POUR'] },
+    { id: 'L2', num: 2, name: 'Line 2', stations: ['CORE', 'PAINT', 'TURN', 'POUR'] },
+    { id: 'L3', num: 3, name: 'Line 3', stations: ['CORE', 'CHAP', 'PAINT', 'POUR'] },
+    { id: 'L4', num: 4, name: 'Line 4', stations: ['CORE', 'CHAP', 'PAINT', 'POUR'] }
   ];
   S.stations = [
     { id: 'CORE', name: 'Cores' }, { id: 'CHAP', name: 'Chaplets' },
-    { id: 'PAINT', name: 'Paint' }, { id: 'POUR', name: 'Close and pour' }
+    { id: 'PAINT', name: 'Paint' }, { id: 'TURN', name: 'Turntable', optional: true },
+    { id: 'POUR', name: 'Close and pour' }
   ];
   S.jobs = [
     { job: '9900101', customer: 'Northland Turbine', pattern: 'NT-7138', alloy: 'Ductile Iron 65-45-12', qty: 3, pourTempF: 2600 },
@@ -29,6 +32,7 @@ var SCF = (function () {
     add('CHAP', cores ? 'Place chaplets on the marks. Size must match the layout sheet.' : 'No chaplets. Check the mould face is clean.', cores ? 'Chaplets on marks, right size' : 'Mould face clean', true, p === 'NT-7138' ? 'Check chaplet sizes against the layout before closing' : '', cores ? 'chaplets on marks' : 'clean mould face');
     add('PAINT', 'Coat both halves evenly. No runs, no bare sand. Torch dry until it stops smoking.', 'Even coat, no runs, dry', true, '', 'even coat, torch dried');
     add('PAINT', 'Blow out loose sand from the cavity before closing.', 'Blow out cavity', false, '', 'clean cavity');
+    add('TURN', 'Roll the mould half on the turntable. Check the face for drops or cracks after the roll.', 'Face clean after roll', true, 'Keep hands clear while the table turns', 'mould face after roll');
     add('POUR', 'Close the mould. Clamp and set weights. Pour at ' + j.pourTempF + ' F.', 'Clamped, weighted, ' + j.pourTempF + ' F', true, /Ductile/.test(j.alloy) ? 'Ductile: pour within 10 min of treatment' : (/Ni-Hard/.test(j.alloy) ? 'Ni-Hard: leave in mould 8 hours' : ''), 'closed and clamped mould');
     return out;
   }
@@ -48,6 +52,7 @@ var SCF = (function () {
     catch (e) { alert('Storage is full. Remove a photo and try again.'); }
   };
   S.reset = function () { S.state = defaults(); S.save(); };
+  S.station = function (id) { for (var i = 0; i < S.stations.length; i++) if (S.stations[i].id === id) return S.stations[i]; return null; };
   S.job = function (no) { for (var i = 0; i < S.jobs.length; i++) if (S.jobs[i].job === no) return S.jobs[i]; return null; };
   S.onChange = function (fn) { window.addEventListener('storage', function (e) { if (e.key === KEY) { S.load(); fn(); } }); };
   S.esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
