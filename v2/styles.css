@@ -74,7 +74,8 @@ main{padding:16px;max-width:1920px;margin:0 auto}
   .steps.paged .step{display:flex}
   .step .stepnav{display:none}
   .fact{padding:16px 20px;border-color:#8A9198}
-  .fact .val{font-size:64px}
+  .fact .val{font-size:clamp(40px,3.3vw,64px);white-space:nowrap}
+  .fact .val.long{font-size:clamp(36px,2.6vw,52px)}
   .jobhead dd{font-size:1.4em}
   .jobhead dt{font-size:24px}
 }

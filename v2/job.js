@@ -19,7 +19,7 @@
                 : '<button class="btn primary" type="button" data-go="' + (i + 1) + '">Next' + I.next + '</button>') +
         '</div></section>';
     }).join('');
-    function fact(cls, icon, lbl, val) { return '<div class="fact ' + cls + '"><div class="lbl">' + icon + lbl + '</div><div class="val">' + val + '</div></div>'; }
+    function fact(cls, icon, lbl, val) { return '<div class="fact ' + cls + '"><div class="lbl">' + icon + lbl + '</div><div class="val' + (String(val).length > 12 ? ' long' : '') + '">' + val + '</div></div>'; }
     K.app.innerHTML =
       '<div class="back"><button class="btn" type="button" id="backBtn">' + I.back + 'Back to jobs</button></div>' +
       '<div class="jobhead"><h1>Job ' + e(j.job) + '</h1><div class="sub">' + e(j.customer) + ', ' + e(j.description) + '</div>' +
