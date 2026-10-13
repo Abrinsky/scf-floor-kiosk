@@ -46,39 +46,67 @@ main{padding:16px;max-width:1920px;margin:0 auto}
 .fact .lbl svg{width:36px;height:36px;flex:none}
 .fact .val{font-size:var(--fact);font-weight:800;line-height:1.1;word-break:break-word}
 .fact.hot .lbl svg{color:var(--red)}
-.steps{display:grid;gap:var(--gap)}
-.step{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px}
-.step .num{font-weight:800;color:var(--muted)}
-.photo{aspect-ratio:4/3;background:#D5D9DD;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--text);font-weight:700;text-align:center;padding:8px}
-.photo svg{width:64px;height:64px}
-.photo img{width:100%;height:100%;object-fit:cover;border-radius:8px}
-.instr{font-weight:800;font-size:1.2em}
-.caution{display:flex;gap:12px;align-items:flex-start;background:var(--redbg);border-left:8px solid var(--red);padding:12px;border-radius:6px;font-weight:700}
-.caution svg{width:32px;height:32px;flex:none;color:var(--red)}
-.stepnav{display:flex;flex-wrap:wrap;gap:var(--gap);align-items:center;justify-content:space-between}
-.progress{font-weight:800}
-.done-msg{background:var(--greenbg);border:2px solid var(--green);color:var(--text);padding:16px;border-radius:12px;font-weight:800}
 /* Not found */
 .nf{max-width:900px;margin:40px auto;background:var(--card);border:2px solid var(--line);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:20px}
 .nf .msg{font-size:1.3em;font-weight:800}
-/* Active step: amber outline only, all steps stay visible */
-.step.cur{border-color:var(--amber);box-shadow:0 0 0 4px var(--amber)}
-/* Tablet / large */
-@media (min-width:760px){.grid{grid-template-columns:1fr 1fr}.facts{grid-template-columns:repeat(4,1fr)}}
-@media (min-width:1200px){
+.caution.info{background:var(--bluebg);border-left-color:var(--blue)}.caution.info svg{color:var(--blue)}
+
+/* Steps: phone = horizontal cards */
+.steps{display:grid;gap:var(--gap)}
+.step{position:relative;display:flex;gap:16px;align-items:flex-start;background:var(--card);border:2px solid var(--line);border-radius:12px;padding:16px;cursor:pointer;min-height:var(--tap)}
+.step:focus-visible{outline:4px solid var(--blue);outline-offset:3px}
+.step .photo{flex:none;width:96px;height:96px;aspect-ratio:auto;border:0;padding:4px;font:inherit;font-size:13px;cursor:zoom-in}
+.step .photo svg{width:36px;height:36px}
+.step .body{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px}
+.numrow{display:flex;align-items:center;justify-content:space-between}
+.badge-num{width:48px;height:48px;border-radius:50%;background:var(--text);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:22px}
+.tick{width:48px;height:48px;border-radius:50%;border:3px solid var(--line);display:inline-flex;align-items:center;justify-content:center;color:transparent}
+.tick svg{width:30px;height:30px}
+.step.done{background:#E9ECEE}
+.step.done .tick{background:var(--green);border-color:var(--green);color:#fff}
+.step.done .badge-num{background:var(--green)}
+.step.done .photo{opacity:.7}
+.instr{font-weight:800;font-size:1.1em}
+.progress{position:sticky;top:0;z-index:6;background:var(--text);color:#fff;padding:12px 16px;border-radius:10px;margin-bottom:var(--gap);font-weight:800;font-size:1.1em}
+.reset{margin-top:24px}
+.back{position:static}
+.lightbox{position:fixed;inset:0;z-index:50;background:rgba(29,35,41,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:16px}
+.lightbox .close{min-width:200px;font-size:1.2em}
+.lightbox .photo.big{width:min(100%,1400px,calc((100vh - 140px)*4/3));aspect-ratio:4/3}
+.lightbox .photo.big svg{width:96px;height:96px}
+@media (max-width:399px){.facts{grid-template-columns:1fr}.brand .sub{display:none}}
+@media (max-width:767px){.fact .val{white-space:nowrap;overflow-wrap:normal;word-break:normal;font-size:clamp(22px,7vw,32px)}}
+/* Tablet */
+@media (min-width:768px){
+  .facts{grid-template-columns:repeat(4,1fr)}
+  .grid{grid-template-columns:1fr 1fr}
+  .progress{position:static}
+  .steps{grid-template-columns:1fr 1fr}
+  .step{flex-direction:column;align-items:stretch}
+  .step .photo{width:100%;height:auto;aspect-ratio:4/3;font-size:inherit}
+  .step .photo svg{width:64px;height:64px}
+  .instr{font-size:28px}
+  .fact .val{white-space:normal;word-break:normal;overflow-wrap:normal}
+  .fact.code .val{white-space:nowrap}
+}
+/* TV */
+@media (min-width:1280px){
   :root{--fs:24px;--h:44px;--fact:56px;--gap:24px}
   main{padding:24px 32px}
   .grid{grid-template-columns:repeat(3,1fr)}
   .card .thumb{width:140px}
-  .steps{grid-template-columns:repeat(2,1fr)}
+  .jobwrap{display:grid;grid-template-columns:400px 1fr;gap:var(--gap);align-items:start}
+  .jobside{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto}
+  .facts{grid-template-columns:1fr}
   .fact{padding:16px 20px;border-color:#8A9198}
-  .fact .val{font-size:clamp(40px,3.3vw,64px);white-space:nowrap}
-  .fact .val.long{font-size:clamp(36px,2.6vw,52px)}
-  .jobhead dd{font-size:1.4em}
+  .fact.code .val{font-size:48px}
   .jobhead dt{font-size:24px}
+  .jobhead dd{font-size:1.2em}
+  .instr{font-size:30px}
 }
-@media (min-width:1600px){.steps{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:1900px){.steps.many{grid-template-columns:repeat(3,1fr)}}
+.photo{aspect-ratio:4/3;background:#D5D9DD;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--text);font-weight:700;text-align:center;padding:8px}
+.photo img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+.caution{display:flex;gap:12px;align-items:flex-start;background:var(--redbg);border-left:8px solid var(--red);padding:12px;border-radius:6px;font-weight:700}
+.caution svg{width:32px;height:32px;flex:none;color:var(--red)}
 .caution.info{background:var(--bluebg);border-left-color:var(--blue)}.caution.info svg{color:var(--blue)}
-@media (max-width:759px){.fact .val{white-space:nowrap;overflow-wrap:normal;word-break:normal;font-size:clamp(22px,7vw,32px)}}
-@media (max-width:399px){.facts{grid-template-columns:1fr}}
-@media (max-width:399px){.brand .sub{display:none}}

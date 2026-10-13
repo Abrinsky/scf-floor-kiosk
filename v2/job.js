@@ -1,52 +1,70 @@
-/* Job screen: header, key-facts tiles, numbered step cards. */
+/* Job screen: header with progress, key facts, all step cards with done tracking. */
 (function (K) {
   'use strict';
+  function load(no) { try { return JSON.parse(localStorage.getItem('kv2-done-' + no)) || {}; } catch (e) { return {}; } }
+  function save(no, d) { try { localStorage.setItem('kv2-done-' + no, JSON.stringify(d)); } catch (e) {} }
+
+  function openPhoto(step) {
+    var e = K.esc, d = document.createElement('div');
+    d.className = 'lightbox'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true');
+    d.innerHTML = '<button class="btn primary close" type="button">Close</button>' +
+      '<div class="photo big">' + (step.photo ? '<img src="' + e(step.photo) + '" alt="' + e(step.photoLabel) + '">' : K.icon.camera + '<span>Photo: ' + e(step.photoLabel) + '</span>') + '</div>';
+    d.querySelector('.close').addEventListener('click', function (ev) { ev.preventDefault(); d.remove(); });
+    document.body.appendChild(d);
+    d.querySelector('.close').focus({ preventScroll: true });
+  }
+
   K.renderJob = function (j) {
     var e = K.esc, I = K.icon;
-    var steps = K.steps[j.pattern] || [];
-    var n = steps.length;
+    var steps = K.steps[j.pattern] || [], n = steps.length, done = load(j.job);
     var cards = steps.map(function (s, i) {
-      var photo = s.photo ? '<img src="' + e(s.photo) + '" alt="' + e(s.photoLabel) + '">' : I.camera + '<span>Photo: ' + e(s.photoLabel) + '</span>';
-      var last = i === n - 1;
-      return '<section class="step' + (i === 0 ? ' cur' : '') + '" data-i="' + i + '">' +
-        '<div class="num">Step ' + (i + 1) + ' of ' + n + '</div>' +
-        '<div class="photo">' + photo + '</div>' +
+      var photo = s.photo ? '<img src="' + e(s.photo) + '" alt="">' : I.camera + '<span>Photo: ' + e(s.photoLabel) + '</span>';
+      return '<div class="step' + (done[i] ? ' done' : '') + '" data-i="' + i + '" role="checkbox" tabindex="0" aria-checked="' + !!done[i] + '">' +
+        '<button class="photo" type="button" data-photo="' + i + '" aria-label="Open photo: ' + e(s.photoLabel) + '">' + photo + '</button>' +
+        '<div class="body"><div class="numrow"><span class="badge-num">' + (i + 1) + '</span><span class="tick">' + I.check + '</span></div>' +
         '<div class="instr">' + e(s.text) + '</div>' +
         (s.caution ? '<div class="caution" role="note">' + I.warn + '<span>' + e(s.caution) + '</span></div>' : '') +
-        '<div class="stepnav">' +
-          (i > 0 ? '<button class="btn" type="button" data-go="' + (i - 1) + '">' + I.back + 'Previous</button>' : '<span></span>') +
-          (last ? '<button class="btn primary" type="button" data-done>' + I.check + 'Done</button>'
-                : '<button class="btn primary" type="button" data-go="' + (i + 1) + '">Next' + I.next + '</button>') +
-        '</div></section>';
+        '</div></div>';
     }).join('');
-    function fact(cls, icon, lbl, val) { return '<div class="fact ' + cls + '"><div class="lbl">' + icon + lbl + '</div><div class="val' + (String(val).length > 12 ? ' long' : '') + '">' + val + '</div></div>'; }
+    function fact(cls, icon, lbl, val) { return '<div class="fact ' + cls + '"><div class="lbl">' + icon + lbl + '</div><div class="val">' + val + '</div></div>'; }
     K.app.innerHTML =
       '<div class="back"><button class="btn" type="button" id="backBtn">' + I.back + 'Back to jobs</button></div>' +
-      '<div class="jobhead"><h1>Job ' + e(j.job) + '</h1><div class="sub">' + e(j.customer) + ', ' + e(j.description) + '</div>' +
-      '<dl><div><dt>Pattern</dt><dd>' + e(j.pattern) + '</dd></div><div><dt>Alloy</dt><dd>' + e(j.alloy) + ' ' + e(j.grade) + '</dd></div><div><dt>Qty</dt><dd>' + e(j.qty) + '</dd></div></dl></div>' +
-      '<div class="facts">' +
-        fact('hot', I.temp, 'Pour temp', e(j.pourTempF) + ' F') +
-        fact('', I.flask, 'Flask', e(j.flask)) +
-        fact('', I.weight, 'Cope / drag', e(j.copeLb) + ' / ' + e(j.dragLb) + ' lb') +
-        fact('', I.pin, 'Pattern location', e(j.location)) +
-      '</div>' +
-      '<h2 class="vh" hidden>Steps</h2><div class="steps" id="steps">' + cards + '</div>' +
-      '<div id="doneMsg"></div>';
-    document.getElementById('backBtn').addEventListener('click', K.home);
-    var box = document.getElementById('steps');
+      '<div class="progress" id="prog" aria-live="polite"></div>' +
+      '<div class="jobwrap"><aside class="jobside">' +
+        '<div class="jobhead"><h1>Job ' + e(j.job) + '</h1><div class="sub">' + e(j.customer) + ', ' + e(j.description) + '</div>' +
+        '<dl><div><dt>Pattern</dt><dd>' + e(j.pattern) + '</dd></div><div><dt>Alloy</dt><dd>' + e(j.alloy) + ' ' + e(j.grade) + '</dd></div><div><dt>Qty</dt><dd>' + e(j.qty) + '</dd></div></dl>' +
+        '</div>' +
+        '<div class="facts">' +
+          fact('hot', I.temp, 'Pour temp', e(j.pourTempF) + ' F') +
+          fact('', I.flask, 'Flask', e(j.flask)) +
+          fact('', I.weight, 'Cope / drag', e(j.copeLb) + ' / ' + e(j.dragLb) + ' lb') +
+          fact('code', I.pin, 'Pattern location', e(j.location)) +
+        '</div></aside>' +
+        '<div class="stepcol"><div class="steps' + (n > 8 ? ' many' : '') + '" id="steps">' + cards + '</div>' +
+        '<button class="btn reset" type="button" id="resetBtn">Reset steps</button></div></div>';
+
+    var box = document.getElementById('steps'), prog = document.getElementById('prog');
+    function count() { var c = 0; for (var k in done) if (done[k]) c++; prog.textContent = c + ' of ' + n + ' done'; }
+    function toggle(card) {
+      var i = card.getAttribute('data-i'); done[i] = !done[i];
+      card.classList.toggle('done', done[i]); card.setAttribute('aria-checked', done[i]);
+      save(j.job, done); count();
+    }
+    count();
+    document.getElementById('backBtn').addEventListener('click', function (ev) { ev.preventDefault(); K.home(); });
     box.addEventListener('click', function (ev) {
-      var g = ev.target.closest('[data-go]');
-      if (g) {
-        ev.preventDefault(); g.blur();
-        var to = +g.getAttribute('data-go'), target = null;
-        box.querySelectorAll('.step').forEach(function (s) { var on = +s.getAttribute('data-i') === to; s.classList.toggle('cur', on); if (on) target = s; });
-        if (target) target.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-      }
-      if (ev.target.closest('[data-done]')) {
-        ev.preventDefault();
-        document.getElementById('doneMsg').innerHTML = '<p class="done-msg">All steps done for job ' + e(j.job) + '. Scan the next ticket or go back to jobs.</p>';
-        document.getElementById('doneMsg').scrollIntoView({ block: 'center' });
-      }
+      ev.preventDefault();
+      var p = ev.target.closest('[data-photo]');
+      if (p) { openPhoto(steps[+p.getAttribute('data-photo')]); return; }
+      var c = ev.target.closest('.step'); if (c) toggle(c);
+    });
+    box.addEventListener('keydown', function (ev) {
+      if ((ev.key === ' ' || ev.key === 'Enter') && ev.target.classList.contains('step')) { ev.preventDefault(); ev.stopPropagation(); toggle(ev.target); }
+    });
+    document.getElementById('resetBtn').addEventListener('click', function (ev) {
+      ev.preventDefault(); done = {}; save(j.job, done);
+      box.querySelectorAll('.step').forEach(function (c) { c.classList.remove('done'); c.setAttribute('aria-checked', 'false'); });
+      count();
     });
   };
 })(Kiosk);
