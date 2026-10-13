@@ -1,5 +1,5 @@
 /* SCF Floor Kiosk v2. Clean industrial. Amber = actions, red = hazards, blue = info. */
-:root{--bg:#F5F6F7;--card:#FFFFFF;--text:#1D2329;--muted:#363E46;--line:#C9CED3;--amber:#E8A317;--red:#B3261E;--redbg:#FCE8E6;--blue:#0B57A4;--bluebg:#E3EEF9;--green:#1E6B34;--greenbg:#E2F1E6;
+:root{--bg:#F5F6F7;--card:#FFFFFF;--text:#1D2329;--muted:#363E46;--line:#C9CED3;--amber:#E8A317;--red:#8C1D18;--redbg:#FCE8E6;--blue:#084480;--bluebg:#E3EEF9;--green:#155226;--greenbg:#E2F1E6;
   --fs:18px;--h:28px;--fact:32px;--gap:16px;--tap:72px}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:var(--fs);line-height:1.35}
