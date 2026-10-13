@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SCF kiosk v3 demos (example data)</title>
-<link rel="stylesheet" href="common.css?v=2">
+<link rel="stylesheet" href="common.css?v=3">
 <style>
 body{font-size:20px}
 header{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 24px;background:var(--text);color:#fff}
@@ -21,13 +21,13 @@ a.link{color:var(--blue);font-weight:800}
 <h1>Floor kiosk v3 demos</h1>
 <p>One shared TV for the moulding lines and an iPad for the foreman. Open both in the same browser, side by side. Changes on the iPad show on the TV right away.</p>
 <div class="cards">
-  <a class="big" href="tv.html?v=2" id="tvCard"><span id="i1"></span><b>TV kiosk</b><span>Line by station grid with "should look like" photos and spotlight mode. 1920 x 1080.</span><span class="btn primary go">Open TV</span></a>
-  <a class="big" href="ipad.html?v=2" id="padCard"><span id="i2"></span><b>iPad controller</b><span>Assign jobs to lines, pin lines for the TV, edit steps and photos, start a spotlight. 1024 x 1366.</span><span class="btn primary go">Open iPad</span></a>
+  <a class="big" href="tv.html?v=3" id="tvCard"><span id="i1"></span><b>TV kiosk</b><span>Line by station grid with "should look like" photos and spotlight mode. 1920 x 1080.</span><span class="btn primary go">Open TV</span></a>
+  <a class="big" href="ipad.html?v=3" id="padCard"><span id="i2"></span><b>iPad controller</b><span>Assign jobs to lines, pin lines for the TV, edit steps and photos, start a spotlight. 1024 x 1366.</span><span class="btn primary go">Open iPad</span></a>
 </div>
-<p class="note">For SCF IT: the FileMaker <a class="link" href="spec.html?v=2">data sheet</a> lists the tables, fields and layout notes for the rebuild.</p>
+<p class="note">For SCF IT: the FileMaker <a class="link" href="spec.html?v=3">data sheet</a> lists the tables, fields and layout notes for the rebuild.</p>
 <p><button class="btn" type="button" id="reset">Reset demo data</button></p>
 </main>
-<script src="store.js?v=2"></script>
+<script src="store.js?v=3"></script>
 <script>
 document.getElementById('i1').innerHTML = SCF.icon.tv; document.getElementById('i2').innerHTML = SCF.icon.pad;
 document.getElementById('reset').addEventListener('click', function () { SCF.reset(); this.textContent = 'Demo data reset'; });

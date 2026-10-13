@@ -73,7 +73,7 @@ var SCF = (function () {
   };
   S.photo = function (step, cls) {
     return '<div class="ph ' + (cls || '') + '">' + (step.photo ? '<img src="' + step.photo + '" alt="">' :
-      S.icon.camera + '<span>Should look like: ' + S.esc(step.photoLabel) + '</span>') + '</div>';
+      S.icon.camera + '<span><span class="pre">Should look like: </span>' + S.esc(step.photoLabel) + '</span>') + '</div>';
   };
   return S;
 })();
