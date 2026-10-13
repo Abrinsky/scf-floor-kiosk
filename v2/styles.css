@@ -74,6 +74,7 @@ main{padding:16px;max-width:1920px;margin:0 auto}
   .steps.paged .step{display:flex}
   .step .stepnav{display:none}
   .jobhead dd{font-size:1.4em}
+  .jobhead dt{font-size:24px}
 }
 @media (min-width:1600px){.steps{grid-template-columns:repeat(3,1fr)}}
 .caution.info{background:var(--bluebg);border-left-color:var(--blue)}.caution.info svg{color:var(--blue)}
