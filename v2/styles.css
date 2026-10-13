@@ -73,6 +73,8 @@ main{padding:16px;max-width:1920px;margin:0 auto}
   .steps{grid-template-columns:repeat(2,1fr)}
   .steps.paged .step{display:flex}
   .step .stepnav{display:none}
+  .fact{padding:16px 20px;border-color:#8A9198}
+  .fact .val{font-size:64px}
   .jobhead dd{font-size:1.4em}
   .jobhead dt{font-size:24px}
 }
