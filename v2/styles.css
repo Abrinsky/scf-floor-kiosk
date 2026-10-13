@@ -76,3 +76,4 @@ main{padding:16px;max-width:1920px;margin:0 auto}
   .jobhead dd{font-size:1.4em}
 }
 @media (min-width:1600px){.steps{grid-template-columns:repeat(3,1fr)}}
+.caution.info{background:var(--bluebg);border-left-color:var(--blue)}.caution.info svg{color:var(--blue)}

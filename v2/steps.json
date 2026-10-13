@@ -4,48 +4,48 @@
     "NT-7138": [
       {
         "photo": "",
-        "photoLabel": "Pull pattern",
+        "photoLabel": "pull pattern",
         "text": "Pull pattern NT-7138 from B2-S1-R4-2. Check gates and risers are all there."
       },
       {
         "photo": "",
-        "photoLabel": "Ram drag",
+        "photoLabel": "ram drag",
         "text": "Ram drag. Strike off, vent, roll over."
       },
       {
         "photo": "",
-        "photoLabel": "Ram cope",
+        "photoLabel": "ram cope",
         "text": "Ram cope with 2 exothermic riser sleeves on the bosses."
       },
       {
         "photo": "",
-        "photoLabel": "Finish mold",
+        "photoLabel": "finish mold",
         "text": "Blow out mold. Coat and torch dry both halves."
       },
       {
         "photo": "",
-        "photoLabel": "Set core A",
+        "photoLabel": "set core A",
         "text": "Set core A (nobake) x1. Main bore core.",
         "caution": "Check chaplet sizes against the layout photo before closing."
       },
       {
         "photo": "",
-        "photoLabel": "Set core B",
+        "photoLabel": "set core B",
         "text": "Set core B (shell) x2. Port cores, set chaplets first."
       },
       {
         "photo": "",
-        "photoLabel": "Set core C",
+        "photoLabel": "set core C",
         "text": "Set core C (oil) x4. Bolt hole cores."
       },
       {
         "photo": "",
-        "photoLabel": "Set cope on drag",
+        "photoLabel": "set cope on drag",
         "text": "Set cope on drag. Clamp and weight the mold."
       },
       {
         "photo": "",
-        "photoLabel": "Closed mold",
+        "photoLabel": "closed mold",
         "text": "Pour at 2600 F. Mark the mold with job 9900101.",
         "caution": "Ductile: inoculate in the ladle. Pour within 10 min of treatment."
       }
@@ -53,53 +53,53 @@
     "MC-730": [
       {
         "photo": "",
-        "photoLabel": "Pull pattern",
+        "photoLabel": "pull pattern",
         "text": "Pull pattern MC-730 and the HD plate from B4-S2-R3-3."
       },
       {
         "photo": "",
-        "photoLabel": "Ram drag",
+        "photoLabel": "ram drag",
         "text": "Ram drag. Vent over the thick flange."
       },
       {
         "photo": "",
-        "photoLabel": "Ram cope",
+        "photoLabel": "ram cope",
         "text": "Ram cope. Cut pouring basin on the operator side."
       },
       {
         "photo": "",
-        "photoLabel": "Finish mold",
+        "photoLabel": "finish mold",
         "text": "Set cores A to D in order. Blow out and close."
       },
       {
         "photo": "",
-        "photoLabel": "Set core A",
+        "photoLabel": "set core A",
         "text": "Set core A (nobake) x10.",
         "caution": "Pressure test first parts before shipping."
       },
       {
         "photo": "",
-        "photoLabel": "Set core B",
+        "photoLabel": "set core B",
         "text": "Set core B (nobake) x12."
       },
       {
         "photo": "",
-        "photoLabel": "Set core C",
+        "photoLabel": "set core C",
         "text": "Set core C (oil) x3."
       },
       {
         "photo": "",
-        "photoLabel": "Set core D",
+        "photoLabel": "set core D",
         "text": "Set core D (shell) x3. Use 1/2 in band lug core box."
       },
       {
         "photo": "",
-        "photoLabel": "Set cope on drag",
+        "photoLabel": "set cope on drag",
         "text": "Set cope on drag. Clamp and weight the mold."
       },
       {
         "photo": "",
-        "photoLabel": "Finished mold",
+        "photoLabel": "finished mold",
         "text": "Pour at 2550 F. Mark the mold with job 9900102.",
         "caution": "See process sheet photos before setting cores."
       }
@@ -107,43 +107,43 @@
     "PP-4410": [
       {
         "photo": "",
-        "photoLabel": "Pull pattern",
+        "photoLabel": "pull pattern",
         "text": "Pull pattern PP-4410 and the vane core prints."
       },
       {
         "photo": "",
-        "photoLabel": "Ram drag",
+        "photoLabel": "ram drag",
         "text": "Ram drag with chills on the vane tips. Count chills: 6."
       },
       {
         "photo": "",
-        "photoLabel": "Ram cope",
+        "photoLabel": "ram cope",
         "text": "Ram cope. Two open risers on the hub."
       },
       {
         "photo": "",
-        "photoLabel": "Finish mold",
+        "photoLabel": "finish mold",
         "text": "Coat both halves heavy. Torch dry."
       },
       {
         "photo": "",
-        "photoLabel": "Set core A",
+        "photoLabel": "set core A",
         "text": "Set core A (nobake) x1. Vane core, handle with 2 people.",
         "caution": "Very hard and brittle. No hammer on castings."
       },
       {
         "photo": "",
-        "photoLabel": "Set core B",
+        "photoLabel": "set core B",
         "text": "Set core B (nobake) x1. Eye core."
       },
       {
         "photo": "",
-        "photoLabel": "Set cope on drag",
+        "photoLabel": "set cope on drag",
         "text": "Set cope on drag. Clamp and weight the mold."
       },
       {
         "photo": "",
-        "photoLabel": "Closed mold",
+        "photoLabel": "closed mold",
         "text": "Pour at 2650 F. Mark the mold with job 9900103.",
         "caution": "Ni-Hard: do NOT shake out early. Leave in mold 8 hours minimum."
       }
@@ -151,37 +151,37 @@
     "RC-2207": [
       {
         "photo": "",
-        "photoLabel": "Pull pattern",
+        "photoLabel": "pull pattern",
         "text": "Pull match plate RC-2207 (2 on)."
       },
       {
         "photo": "",
-        "photoLabel": "Ram drag",
+        "photoLabel": "ram drag",
         "text": "Ram drag and cope. No cores on this job."
       },
       {
         "photo": "",
-        "photoLabel": "Ram cope",
+        "photoLabel": "ram cope",
         "text": "Vent over each boss. Blow out and close."
       },
       {
         "photo": "",
-        "photoLabel": "Finish mold",
+        "photoLabel": "finish mold",
         "text": "Stack 4 molds per pour row."
       },
       {
         "photo": "",
-        "photoLabel": "Check for core prints",
+        "photoLabel": "check for core prints",
         "text": "No cores on this job. Check that no core print is showing."
       },
       {
         "photo": "",
-        "photoLabel": "Set cope on drag",
+        "photoLabel": "set cope on drag",
         "text": "Set cope on drag. Clamp and weight the mold."
       },
       {
         "photo": "",
-        "photoLabel": "Closed mold",
+        "photoLabel": "closed mold",
         "text": "Pour at 2500 F. Mark the mold with job 9900104.",
         "caution": "No cores. If a core print is showing, stop and call the lead."
       }
@@ -189,38 +189,38 @@
     "HH-510": [
       {
         "photo": "",
-        "photoLabel": "Pull pattern",
+        "photoLabel": "pull pattern",
         "text": "Pull pattern HH-510. Confirm filter print is clean."
       },
       {
         "photo": "",
-        "photoLabel": "Ram drag",
+        "photoLabel": "ram drag",
         "text": "Ram drag. Set ceramic filter in the runner."
       },
       {
         "photo": "",
-        "photoLabel": "Ram cope",
+        "photoLabel": "ram cope",
         "text": "Ram cope. Vent the center boss."
       },
       {
         "photo": "",
-        "photoLabel": "Finish mold",
+        "photoLabel": "finish mold",
         "text": "Set core A. Blow out and close."
       },
       {
         "photo": "",
-        "photoLabel": "Set core A",
+        "photoLabel": "set core A",
         "text": "Set core A (shell) x8. Port core, check for cracks.",
         "caution": "Ductile: pour within 10 min of treatment."
       },
       {
         "photo": "",
-        "photoLabel": "Set cope on drag",
+        "photoLabel": "set cope on drag",
         "text": "Set cope on drag. Clamp and weight the mold."
       },
       {
         "photo": "",
-        "photoLabel": "Closed mold",
+        "photoLabel": "closed mold",
         "text": "Pour at 2600 F. Mark the mold with job 9900105.",
         "caution": "Cores due from core room at 1:30 PM. Do not close molds without them."
       }

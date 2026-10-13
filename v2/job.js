@@ -6,7 +6,7 @@
     var steps = K.steps[j.pattern] || [];
     var n = steps.length;
     var cards = steps.map(function (s, i) {
-      var photo = s.photo ? '<img src="' + e(s.photo) + '" alt="' + e(s.photoLabel) + '">' : I.camera + '<span>Photo: ' + e((s.photoLabel || '').toLowerCase()) + '</span>';
+      var photo = s.photo ? '<img src="' + e(s.photo) + '" alt="' + e(s.photoLabel) + '">' : I.camera + '<span>Photo: ' + e(s.photoLabel) + '</span>';
       var last = i === n - 1;
       return '<section class="step' + (i === 0 ? ' cur' : '') + '" data-i="' + i + '">' +
         '<div class="num">Step ' + (i + 1) + ' of ' + n + '</div>' +
